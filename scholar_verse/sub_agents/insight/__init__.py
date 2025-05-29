@@ -1,0 +1,1 @@
+"""Insight Agent for ScholarVerse."""
