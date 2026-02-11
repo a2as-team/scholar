@@ -1,0 +1,1741 @@
+manifest:
+  version: "0.1.3"
+  schema: https://a2as.org/cert/schema
+  subject:
+    name: kaushiksai711/scholar
+    source: https://github.com/kaushiksai711/scholar
+    branch: main
+    commit: "d048cba1"
+    scope: [scholar_verse/agent.py, scholar_verse/base_agent.py, scholar_verse/config.py, scholar_verse/main.py, scholar_verse/prompt.py,
+      scholar_verse/shared_libraries/logging_utils.py, scholar_verse/shared_libraries/memory_manager.py, scholar_verse/shared_libraries/session_manager.py,
+      scholar_verse/shared_libraries/state_management/adaptive_state.py, scholar_verse/shared_libraries/state_manager.py,
+      scholar_verse/shared_libraries/utils/circuit_breaker.py, scholar_verse/sub_agents/citation_graph/agent.py, scholar_verse/sub_agents/citation_graph/tools/citation_extraction.py,
+      scholar_verse/sub_agents/citation_graph/tools/neo4j_integration.py, scholar_verse/sub_agents/citation_graph/tools/nl2cypher.py,
+      scholar_verse/sub_agents/citation_graph/tools/relationship_identification.py, scholar_verse/sub_agents/cross_paper_analysis/agent.py,
+      scholar_verse/sub_agents/deep_search/agent.py, scholar_verse/sub_agents/deep_search/prompt.py, scholar_verse/sub_agents/deep_search/tools/__init__.py,
+      scholar_verse/sub_agents/deep_search/tools/base_tool.py, scholar_verse/sub_agents/deep_search/tools/content_extraction.py,
+      scholar_verse/sub_agents/deep_search/tools/rag_integration.py, scholar_verse/sub_agents/deep_search/tools/validation.py,
+      scholar_verse/sub_agents/deep_search/tools/web_scraper.py, scholar_verse/sub_agents/ingestion/agent.py, scholar_verse/sub_agents/ingestion/tools/document_processor.py,
+      scholar_verse/sub_agents/ingestion/tools/extraction_improvement.py, scholar_verse/sub_agents/ingestion/tools/pdf_extraction.py,
+      scholar_verse/sub_agents/ingestion/tools/quality_analysis.py, scholar_verse/sub_agents/insight/agent.py, scholar_verse/sub_agents/visualization/agent.py,
+      scholar_verse/tools/dynamic_routing.py]
+  issued:
+    by: A2AS.org
+    at: '2026-02-11T16:56:20Z'
+    url: https://a2as.org/certified/agents/kaushiksai711/scholar
+  signatures:
+    digest: sha256:noXaa_ZYCi2LUxb7IJwbSzgYSRCJ2kw9msvGJCFW6Fo
+    key: ed25519:e2ksypX8uPAd7uxT12jBW7UiT5Xxf-92fufFYLUa3Dk
+    sig: ed25519:ZEhBudlPGTd5cB0vri-zHCyQfwd90Ol2pc0uh4v0JPqBSyEKirmD-YMapbFbp07C15JHGD_qTnqylVWqYNqPBw
+
+agents:
+  agent.BaseAgent:
+    type: class
+    models: [model]
+    params:
+      class: BaseAgent
+      base: LlmAgent
+      name: name
+      description: description
+      instruction: instruction
+  agent.initialize.0:
+    type: factory
+    models: [gemini-2.5-flash]
+    params:
+      function: initialize
+      instance: agent.initialize
+  agent.initialize.1:
+    type: factory
+    models: [gemini-2.5-flash]
+    params:
+      function: initialize
+      instance: agent.initialize
+  agent.initialize.2:
+    type: factory
+    models: [gemini-2.5-flash]
+    params:
+      function: initialize
+      instance: agent.initialize
+  agent.initialize.3:
+    type: factory
+    models: [gemini-2.5-flash]
+    params:
+      function: initialize
+      instance: agent.initialize
+  citation_graph_agent.0:
+    type: instance
+    models: [gemini-2.5-flash]
+    params:
+      instance: citation_graph_agent
+  citation_graph_agent.1:
+    type: instance
+    models: [gemini-1.5-pro]
+    tools: [connect_to_neo4j_tool, setup_knowledge_graph_tool, add_paper_to_graph_tool, add_citation_tool, extract_citations_tool,
+      match_citations_to_papers_tool, identify_relationships_tool, analyze_citation_network_tool, identify_research_trends_tool,
+      translate_to_cypher_tool, execute_cypher_tool, get_graph_statistics_tool]
+    params:
+      class: CitationGraphAgent
+      base: Agent
+      name: citation_graph_agent
+      instruction: ['You are the Citation Graph Agent for ScholarVerse, an advanced knowledge graph platform for scientific
+          literature.', 'Your primary responsibility is to construct and maintain the knowledge graph in Neo4j, focusing on
+          citation relationships between academic papers.', 'As the Citation Graph Agent, you should:', 1. Extract citations
+          from processed documents, 2. Identify and link papers in the citation network, 3. Construct and maintain the knowledge
+          graph in Neo4j, '4. Identify relationships between papers, authors, and concepts', 5. Provide graph query capabilities
+          for other agents, 'You have access to specialized tools for:', '- Neo4j database integration', '- Citation extraction
+          and parsing', '- Entity recognition and linking', '- Relationship identification', '- Graph querying with Cypher',
+        '- Natural language to Cypher translation', 'When constructing the knowledge graph, consider:', '- The citation relationships
+          between papers', '- Author collaborations and institutions', '- Research topics and concepts', '- Temporal relationships
+          between publications', '- The strength and nature of relationships between entities', Your goal is to create a comprehensive
+          and accurate knowledge graph that enables powerful analysis and visualization of scientific literature relationships.]
+      instance: citation_graph_agent
+  cross_paper_analysis_agent.0:
+    type: instance
+    models: [gemini-2.5-flash]
+    params:
+      instance: cross_paper_analysis_agent
+  cross_paper_analysis_agent.1:
+    type: instance
+    models: [gemini-1.5-pro]
+    tools: [compare_papers_tool, identify_common_themes_tool]
+    params:
+      class: CrossPaperAnalysisAgent
+      base: Agent
+      name: cross_paper_analysis_agent
+      instruction: [To be implemented in Phase 6]
+      instance: cross_paper_analysis_agent
+  deep_search_agent_instance.:
+    type: instance
+    models: [gemini-1.5-pro]
+    params:
+      class: DeepSearchAgent
+      base: LlmAgent
+      name: deep_search_agent
+      description: Agent for conducting deep web searches and content extraction
+      instruction: [To be implemented in Phase 5]
+  deep_search_agent_instance.0:
+    type: instance
+    models: [gemini-2.5-flash]
+    params:
+      instance: deep_search_agent_instance
+  deep_search_agent_instance.1:
+    type: instance
+    models: [gemini-2.5-flash]
+    params:
+      class: DeepSearchAgent
+      base: BaseAgent
+      name: deep_search_agent
+      description: Deep Search Agent for conducting real-time web searches and content extraction
+      instance: agent.DeepSearchAgent
+  deep_search_agent_instance.agent:
+    type: instance
+    models: [gemini-1.5-pro]
+    tools: [self.tools]
+    params:
+      name: deep_search_agent
+      instruction: [To be implemented in Phase 5]
+      class: DeepSearchAgent
+  ingestion_agent.0:
+    type: instance
+    models: [gemini-2.5-flash]
+    params:
+      instance: ingestion_agent
+  ingestion_agent.1:
+    type: instance
+    models: [gemini-1.5-pro]
+    tools: [process_document_tool, process_multiple_documents_tool, extract_text_tool, extract_metadata_tool, analyze_quality_tool,
+      provide_feedback_tool, get_summary_tool, get_performance_tool]
+    params:
+      class: IngestionAgent
+      base: Agent
+      name: ingestion_agent
+      instruction: ['You are the Ingestion Agent for ScholarVerse, an advanced knowledge graph platform for scientific literature.',
+        Your primary responsibility is to process academic PDF documents and extract high-quality text and metadata., 'As
+          the Ingestion Agent, you should:', 1. Extract text content from PDF documents with high accuracy, '2. Identify and
+          extract key metadata (title, authors, abstract, publication date, DOI, etc.)', '3. Analyze document structure to
+          identify sections, figures, tables, and references', 4. Evaluate document quality and provide feedback on extraction
+          success, 5. Continuously improve extraction accuracy based on feedback, 'You have access to specialized tools for:',
+        '- PDF text extraction with OCR capabilities', '- Metadata identification and validation', '- Document structure analysis',
+        '- Quality assessment', '- Self-improvement through feedback loops', 'When processing documents, consider:', '- The
+          document type and format (research paper, review, preprint, etc.)', '- The quality of the PDF (scanned vs. digital,
+          resolution, etc.)', '- The presence of complex elements (equations, tables, figures)', '- The document''s language
+          and domain-specific terminology', '- The extraction confidence for different elements', Your goal is to provide
+          the highest quality document processing to enable accurate knowledge graph construction and downstream analysis
+          by other ScholarVerse agents.]
+      instance: ingestion_agent
+  insight_agent.0:
+    type: instance
+    models: [gemini-2.5-flash]
+    params:
+      instance: insight_agent
+  insight_agent.1:
+    type: instance
+    models: [gemini-1.5-pro]
+    tools: [generate_insights_tool, analyze_trends_tool]
+    params:
+      class: InsightAgent
+      base: Agent
+      name: insight_agent
+      instruction: [To be implemented in Phase 7]
+      instance: insight_agent
+  router_agent.0:
+    type: instance
+    models: [gemini-2.5-flash]
+    params:
+      instance: router_agent
+  router_agent.1:
+    type: instance
+    models: [gemini-1.5-pro]
+    params:
+      class: RouterAgent
+      base: BaseAgent
+      name: router_agent
+      description: Main router agent that coordinates between specialized sub-agents
+      instruction: ['You are the Router Agent for ScholarVerse, an advanced knowledge graph platform for scientific literature.',
+        'Your role is to orchestrate the workflow between specialized sub-agents based on user requests, document content
+          analysis, and system feedback.', 'As the Router Agent, you should:', 1. Analyze user requests to determine the appropriate
+          workflow and sub-agents to involve, '2. Coordinate the execution of multi-stage workflows for document processing,
+          analysis, and visualization', 3. Make intelligent decisions about which sub-agents to call based on content analysis
+          and context, 4. Maintain state across agent interactions and ensure coherent workflow execution, 5. Provide clear
+          explanations to users about the current process and next steps, 'You have access to the following specialized sub-agents:',
+        '- Ingestion Agent: Processes PDF documents and extracts text and metadata', '- Citation Graph Agent: Constructs and
+          maintains the knowledge graph in Neo4j', '- Cross-Paper Analysis Agent: Performs comparative analysis across multiple
+          papers', '- Deep Search Agent: Conducts real-time web scraping for additional information', '- Insight Agent: Generates
+          AI-powered insights using Google Gemini', '- Visualization Agent: Prepares data for 3D visualization', 'When orchestrating
+          workflows, consider:', '- The specific needs and goals expressed by the user', '- The quality and content of the
+          documents being processed', '- The current state of the knowledge graph', '- The potential value of different types
+          of analysis', '- The most informative way to present results to the user', 'Your goal is to maximize the value of
+          the ScholarVerse platform by intelligently coordinating the activities of specialized agents to deliver comprehensive,
+          insightful analysis of scientific literature.']
+      instance: router_agent
+  visualization_agent.0:
+    type: instance
+    models: [gemini-2.5-flash]
+    params:
+      instance: visualization_agent
+  visualization_agent.1:
+    type: instance
+    models: [gemini-1.5-pro]
+    tools: [generate_network_graph_tool]
+    params:
+      class: VisualizationAgent
+      base: Agent
+      name: visualization_agent
+      instruction: [To be implemented in Phase 8]
+      instance: visualization_agent
+
+models:
+  gemini-1.5-pro:
+    type: literal
+    agents: [deep_search_agent_instance., deep_search_agent_instance.agent, visualization_agent.1, citation_graph_agent.1,
+      ingestion_agent.1, router_agent.1, insight_agent.1, cross_paper_analysis_agent.1]
+  gemini-2.5-flash:
+    type: default
+    agents: [deep_search_agent_instance.0, visualization_agent.0, citation_graph_agent.0, ingestion_agent.0, agent.initialize.0,
+      agent.initialize.1, agent.initialize.2, agent.initialize.3, router_agent.0, insight_agent.0, cross_paper_analysis_agent.0,
+      deep_search_agent_instance.1]
+  model:
+    type: literal
+    agents: [agent.BaseAgent]
+
+tools:
+  add_citation_tool:
+    type: function
+    agents: [citation_graph_agent.1]
+  add_paper_to_graph_tool:
+    type: function
+    agents: [citation_graph_agent.1]
+  analyze_citation_network_tool:
+    type: function
+    agents: [citation_graph_agent.1]
+  analyze_quality_tool:
+    type: function
+    agents: [ingestion_agent.1]
+  analyze_trends_tool:
+    type: function
+    agents: [insight_agent.1]
+  citation_graph_agent_tool:
+    type: agent
+    agents: [citation_graph_agent.0]
+    params:
+      wrapper: AgentTool
+      agent: citation_graph_agent
+  compare_papers_tool:
+    type: function
+    agents: [cross_paper_analysis_agent.1]
+  connect_to_neo4j_tool:
+    type: function
+    agents: [citation_graph_agent.1]
+  cross_paper_analysis_agent_tool:
+    type: agent
+    agents: [cross_paper_analysis_agent.0]
+    params:
+      wrapper: AgentTool
+      agent: cross_paper_analysis_agent
+  deep_search_agent_tool:
+    type: agent
+    agents: [deep_search_agent_instance.agent]
+    params:
+      wrapper: AgentTool
+      agent: deep_search_agent_instance.agent
+  execute_cypher_tool:
+    type: function
+    agents: [citation_graph_agent.1]
+  extract_citations_tool:
+    type: function
+    agents: [citation_graph_agent.1]
+  extract_metadata_tool:
+    type: function
+    agents: [ingestion_agent.1]
+  extract_text_tool:
+    type: function
+    agents: [ingestion_agent.1]
+  generate_insights_tool:
+    type: function
+    agents: [insight_agent.1]
+  generate_network_graph_tool:
+    type: function
+    agents: [visualization_agent.1]
+  get_graph_statistics_tool:
+    type: function
+    agents: [citation_graph_agent.1]
+  get_performance_tool:
+    type: function
+    agents: [ingestion_agent.1]
+  get_summary_tool:
+    type: function
+    agents: [ingestion_agent.1]
+  identify_common_themes_tool:
+    type: function
+    agents: [cross_paper_analysis_agent.1]
+  identify_relationships_tool:
+    type: function
+    agents: [citation_graph_agent.1]
+  identify_research_trends_tool:
+    type: function
+    agents: [citation_graph_agent.1]
+  ingestion_agent_tool:
+    type: agent
+    agents: [ingestion_agent.0]
+    params:
+      wrapper: AgentTool
+      agent: ingestion_agent
+  insight_agent_tool:
+    type: agent
+    agents: [insight_agent.0]
+    params:
+      wrapper: AgentTool
+      agent: insight_agent
+  match_citations_to_papers_tool:
+    type: function
+    agents: [citation_graph_agent.1]
+  process_document_tool:
+    type: function
+    agents: [ingestion_agent.1]
+  process_multiple_documents_tool:
+    type: function
+    agents: [ingestion_agent.1]
+  provide_feedback_tool:
+    type: function
+    agents: [ingestion_agent.1]
+  self.tools:
+    type: function
+    agents: [deep_search_agent_instance.agent]
+    params:
+      dynamic: "True"
+  setup_knowledge_graph_tool:
+    type: function
+    agents: [citation_graph_agent.1]
+  translate_to_cypher_tool:
+    type: function
+    agents: [citation_graph_agent.1]
+  visualization_agent_tool:
+    type: agent
+    agents: [visualization_agent.0]
+    params:
+      wrapper: AgentTool
+      agent: visualization_agent
+
+imports:
+  ABC: abc.ABC
+  abstractmethod: abc.abstractmethod
+  AdaptiveStateManager: scholar_verse.shared_libraries.state_management.adaptive_state.AdaptiveStateManager
+  ADKBaseTool: google.adk.tools.base_tool.BaseTool
+  Agent: google.adk.Agent
+  AgentTool: google.adk.tools.agent_tool.AgentTool
+  Any: typing.Any
+  argparse: argparse
+  asdict: dataclasses.asdict
+  AsyncGenerator: typing.AsyncGenerator
+  asyncio: asyncio
+  auto: enum.auto
+  Awaitable: typing.Awaitable
+  BaseAgent: scholar_verse.base_agent.BaseAgent
+  BaseModel: pydantic.BaseModel
+  BaseTool: google.adk.tools.BaseTool
+  BeautifulSoup: bs4.BeautifulSoup
+  Callable: typing.Callable
+  cast: typing.cast
+  CITATION_GRAPH_AGENT_INSTRUCTIONS: scholar_verse.prompt.CITATION_GRAPH_AGENT_INSTRUCTIONS
+  citation_graph_agent_tool: scholar_verse.sub_agents.citation_graph.agent.citation_graph_agent_tool
+  CitationExtractor: scholar_verse.sub_agents.citation_graph.tools.citation_extraction.CitationExtractor
+  CitationGraphAgent: scholar_verse.sub_agents.citation_graph.agent.CitationGraphAgent
+  CitationValidationTool: scholar_verse.sub_agents.deep_search.tools.CitationValidationTool
+  config: logging.config
+  ContentExtractionTool: scholar_verse.sub_agents.deep_search.tools.ContentExtractionTool
+  Counter: collections.Counter
+  CROSS_PAPER_ANALYSIS_AGENT_INSTRUCTIONS: scholar_verse.prompt.CROSS_PAPER_ANALYSIS_AGENT_INSTRUCTIONS
+  cross_paper_analysis_agent_tool: scholar_verse.sub_agents.cross_paper_analysis.agent.cross_paper_analysis_agent_tool
+  CrossPaperAnalysisAgent: scholar_verse.sub_agents.cross_paper_analysis.agent.CrossPaperAnalysisAgent
+  dataclass: dataclasses.dataclass
+  datetime: datetime.datetime
+  DEEP_SEARCH_AGENT_INSTRUCTIONS: scholar_verse.sub_agents.deep_search.prompt.DEEP_SEARCH_AGENT_INSTRUCTIONS
+  deep_search_agent_tool: scholar_verse.sub_agents.deep_search.agent.deep_search_agent_tool
+  DeepSearchAgent: scholar_verse.sub_agents.deep_search.agent.DeepSearchAgent
+  DEFAULT_MODEL: scholar_verse.config.DEFAULT_MODEL
+  defaultdict: collections.defaultdict
+  Dict: typing.Dict
+  DocumentProcessor: scholar_verse.sub_agents.ingestion.tools.document_processor.DocumentProcessor
+  DocumentQualityAnalyzer: scholar_verse.sub_agents.ingestion.tools.quality_analysis.DocumentQualityAnalyzer
+  DocumentState: scholar_verse.shared_libraries.state_management.adaptive_state.DocumentState
+  Driver: neo4j.Driver
+  Enum: enum.Enum
+  Event: google.adk.events.event.Event
+  ExtractionImprover: scholar_verse.sub_agents.ingestion.tools.extraction_improvement.ExtractionImprover
+  field: dataclasses.field
+  Field: pydantic.Field
+  FunctionTool: google.adk.tools.function_tool.FunctionTool
+  Generic: typing.Generic
+  get_config: scholar_verse.config.get_config
+  GOOGLE_CLOUD_LOCATION: scholar_verse.config.GOOGLE_CLOUD_LOCATION
+  GOOGLE_CLOUD_PROJECT: scholar_verse.config.GOOGLE_CLOUD_PROJECT
+  GoogleAPIError: google.api_core.exceptions.GoogleAPIError
+  GraphDatabase: neo4j.GraphDatabase
+  INGESTION_AGENT_INSTRUCTIONS: scholar_verse.prompt.INGESTION_AGENT_INSTRUCTIONS
+  ingestion_agent_tool: scholar_verse.sub_agents.ingestion.agent.ingestion_agent_tool
+  IngestionAgent: scholar_verse.sub_agents.ingestion.agent.IngestionAgent
+  InMemoryMemoryService: google.adk.memory.InMemoryMemoryService
+  INSIGHT_AGENT_INSTRUCTIONS: scholar_verse.prompt.INSIGHT_AGENT_INSTRUCTIONS
+  insight_agent_tool: scholar_verse.sub_agents.insight.agent.insight_agent_tool
+  InsightAgent: scholar_verse.sub_agents.insight.agent.InsightAgent
+  InvocationContext: google.adk.agents.invocation_context.InvocationContext
+  json: json
+  List: typing.List
+  LlmAgent: google.adk.agents.llm_agent.Agent
+  load_dotenv: dotenv.load_dotenv
+  LOG_LEVEL: scholar_verse.config.LOG_LEVEL
+  logger: scholar_verse.shared_libraries.logging_utils.logger
+  logging: logging
+  MagicMock: unittest.mock.MagicMock
+  MemoryManager: scholar_verse.shared_libraries.memory_manager.MemoryManager
+  MemoryRecord: scholar_verse.shared_libraries.memory_manager.MemoryRecord
+  Neo4jManager: scholar_verse.sub_agents.citation_graph.tools.neo4j_integration.Neo4jManager
+  NL2Cypher: scholar_verse.sub_agents.citation_graph.tools.nl2cypher.NL2Cypher
+  nltk: nltk
+  Optional: typing.Optional
+  os: os
+  parse: urllib.parse
+  Path: pathlib.Path
+  PDFExtractor: scholar_verse.sub_agents.ingestion.tools.pdf_extraction.PDFExtractor
+  pypdf: pypdf
+  RAG_CORPUS: scholar_verse.config.RAG_CORPUS
+  RAGManager: scholar_verse.sub_agents.deep_search.tools.RAGManager
+  RAGRetrievalTool: rag_integration.RAGRetrievalTool
+  random: random
+  re: re
+  redis: redis
+  RedisStateStore: redis_state_store.RedisStateStore
+  RelationshipIdentifier: scholar_verse.sub_agents.citation_graph.tools.relationship_identification.RelationshipIdentifier
+  requests: requests
+  ROOT_DIR: scholar_verse.config.ROOT_DIR
+  router_agent: scholar_verse.agent.router_agent
+  ROUTER_AGENT_INSTRUCTIONS: scholar_verse.prompt.ROUTER_AGENT_INSTRUCTIONS
+  sent_tokenize: nltk.tokenize.sent_tokenize
+  Session: google.adk.sessions.Session
+  SessionManager: scholar_verse.shared_libraries.session_manager.SessionManager
+  Set: typing.Set
+  StateKey: scholar_verse.shared_libraries.state_management.adaptive_state.StateKey
+  StateManager: scholar_verse.shared_libraries.state_manager.StateManager
+  StateScope: scholar_verse.shared_libraries.state_manager.StateScope
+  StateVersionMismatchError: redis_state_store.StateVersionMismatchError
+  TextEmbeddingModel: vertexai.language_models.TextEmbeddingModel
+  time: time
+  timedelta: datetime.timedelta
+  timezone: datetime.timezone
+  tool: google.adk.tools.tool
+  ToolContext: google.adk.tools.tool_context.ToolContext
+  ToolExecutionError: google.adk.core.exceptions.ToolExecutionError
+  ToolParameters: google.adk.tools.ToolParameters
+  Tuple: typing.Tuple
+  Type: typing.Type
+  TypeVar: typing.TypeVar
+  Union: typing.Union
+  urlparse: urllib.parse.urlparse
+  UTC: datetime.UTC
+  VersionedState: redis_state_store.VersionedState
+  VertexAiRagMemoryService: google.adk.memory.vertex_ai_rag.VertexAiRagMemoryService
+  VertexAiSessionService: google.adk.sessions.VertexAiSessionService
+  VISUALIZATION_AGENT_INSTRUCTIONS: scholar_verse.prompt.VISUALIZATION_AGENT_INSTRUCTIONS
+  visualization_agent_tool: scholar_verse.sub_agents.visualization.agent.visualization_agent_tool
+  VisualizationAgent: scholar_verse.sub_agents.visualization.agent.VisualizationAgent
+  WebScraperTool: scholar_verse.sub_agents.deep_search.tools.WebScraperTool
+  WebSearchTool: scholar_verse.sub_agents.deep_search.tools.WebSearchTool
+  WorkflowStage: scholar_verse.shared_libraries.state_management.adaptive_state.WorkflowStage
+  WorkflowState: scholar_verse.shared_libraries.state_management.adaptive_state.WorkflowState
+  wraps: functools.wraps
+
+functions:
+  __call__:
+    type: sync
+    module: scholar_verse.sub_agents.deep_search.tools.rag_integration
+    args: [self, context]
+    params:
+      returns: Any
+  __init__:
+    type: sync
+    module: scholar_verse.sub_agents.cross_paper_analysis.agent
+    args: [self]
+  __new__:
+    type: sync
+    module: scholar_verse.shared_libraries.state_manager
+    args: [cls, key, scope]
+  __post_init__:
+    type: sync
+    module: scholar_verse.base_agent
+    args: [self]
+  _analyze_request_impl:
+    type: async
+    module: scholar_verse.agent
+    args: [self, context, user_input]
+    params:
+      returns: Dict
+  _call:
+    type: sync
+    module: scholar_verse.sub_agents.deep_search.tools.rag_integration
+    args: [self, context]
+    params:
+      returns: Dict
+  _call_agent:
+    type: async
+    module: scholar_verse.agent
+  _check_connection:
+    type: sync
+    module: scholar_verse.shared_libraries.state_management.redis_state_store
+    args: [self]
+    params:
+      returns: None
+  _check_ocr_issues:
+    type: sync
+    module: scholar_verse.sub_agents.ingestion.tools.quality_analysis
+    args: [self, text]
+    params:
+      returns: List[str]
+  _create_analysis_response:
+    type: sync
+    module: scholar_verse.agent
+    args: [self, current_stage, workflow_state, recommended_agent, description]
+    params:
+      returns: Dict
+  _extract_abstract:
+    type: sync
+    module: scholar_verse.sub_agents.ingestion.tools.pdf_extraction
+    args: [self, text]
+    params:
+      returns: str
+  _extract_authors:
+    type: sync
+    module: scholar_verse.sub_agents.ingestion.tools.pdf_extraction
+    args: [self, text]
+    params:
+      returns: List[str]
+  _extract_citations:
+    type: sync
+    module: scholar_verse.sub_agents.deep_search.tools.web_scraper
+    args: [self, soup, url]
+    params:
+      returns: List[Dict]
+  _extract_doi:
+    type: sync
+    module: scholar_verse.sub_agents.ingestion.tools.pdf_extraction
+    args: [self, text]
+    params:
+      returns: str
+  _extract_entities:
+    type: sync
+    module: scholar_verse.sub_agents.deep_search.agent
+    args: [self, text]
+    params:
+      returns: List[Dict]
+  _extract_in_text_citations:
+    type: sync
+    module: scholar_verse.sub_agents.citation_graph.tools.citation_extraction
+    args: [self, text]
+    params:
+      returns: List[Dict]
+  _extract_key_information:
+    type: sync
+    module: scholar_verse.sub_agents.deep_search.tools.content_extraction
+    args: [self, content, metadata]
+    params:
+      returns: Dict
+  _extract_keywords:
+    type: sync
+    module: scholar_verse.sub_agents.ingestion.tools.pdf_extraction
+    args: [self, text]
+    params:
+      returns: List[str]
+  _extract_main_content:
+    type: sync
+    module: scholar_verse.sub_agents.deep_search.tools.web_scraper
+    args: [self, soup]
+    params:
+      returns: str
+  _extract_publication_date:
+    type: sync
+    module: scholar_verse.sub_agents.ingestion.tools.pdf_extraction
+    args: [self, text]
+    params:
+      returns: str
+  _extract_references_section:
+    type: sync
+    module: scholar_verse.sub_agents.citation_graph.tools.citation_extraction
+    args: [self, text]
+    params:
+      returns: str
+  _extract_summary:
+    type: sync
+    module: scholar_verse.sub_agents.deep_search.tools.content_extraction
+    args: [self, content, metadata]
+    params:
+      returns: Dict
+  _extract_title:
+    type: sync
+    module: scholar_verse.sub_agents.ingestion.tools.pdf_extraction
+    args: [self, text]
+    params:
+      returns: str
+  _fallback_async_generator:
+    type: async
+    module: scholar_verse.sub_agents.deep_search.agent
+    args: [self, error]
+  _fetch_url:
+    type: sync
+    module: scholar_verse.sub_agents.deep_search.tools.web_scraper
+    args: [self, url]
+    params:
+      returns: Dict
+  _generate_custom_query:
+    type: sync
+    module: scholar_verse.sub_agents.citation_graph.tools.nl2cypher
+    args: [self, query]
+    params:
+      returns: Tuple
+  _generate_improvement_actions:
+    type: sync
+    module: scholar_verse.sub_agents.ingestion.tools.extraction_improvement
+    args: [self, feedback, current_state]
+    params:
+      returns: List[Dict]
+  _generate_search_summary:
+    type: sync
+    module: scholar_verse.sub_agents.deep_search.agent
+    args: [self, results, query]
+    params:
+      returns: Dict
+  _get_academic_results:
+    type: sync
+    module: scholar_verse.sub_agents.deep_search.tools.web_search
+    args: [self, query]
+    params:
+      returns: List[Dict]
+  _get_available_agents_impl:
+    type: async
+    module: scholar_verse.agent
+    args: [self, context]
+    params:
+      returns: Dict
+  _get_circuit_status_impl:
+    type: async
+    module: scholar_verse.agent
+    args: [self, context]
+    params:
+      returns: Dict
+  _get_general_results:
+    type: sync
+    module: scholar_verse.sub_agents.deep_search.tools.web_search
+    args: [self, query]
+    params:
+      returns: List[Dict]
+  _get_key:
+    type: sync
+    module: scholar_verse.shared_libraries.state_management.redis_state_store
+    args: [self, key]
+    params:
+      returns: str
+  _get_news_results:
+    type: sync
+    module: scholar_verse.sub_agents.deep_search.tools.web_search
+    args: [self, query]
+    params:
+      returns: List[Dict]
+  _get_next_possible_stages:
+    type: sync
+    module: scholar_verse.shared_libraries.state_management.adaptive_state
+    args: [self, stage]
+    params:
+      returns: List[WorkflowStage]
+  _get_next_version:
+    type: sync
+    module: scholar_verse.shared_libraries.state_management.redis_state_store
+    args: [self, current_version]
+    params:
+      returns: str
+  _get_scope_prefix:
+    type: sync
+    module: scholar_verse.shared_libraries.state_manager
+    args: [self, scope]
+    params:
+      returns: str
+  _get_tool_context:
+    type: sync
+    module: scholar_verse.base_agent
+    args: [self, context]
+    params:
+      returns: ToolContext
+  _identify_author_relationships:
+    type: sync
+    module: scholar_verse.sub_agents.citation_graph.tools.relationship_identification
+    args: [self, authors]
+    params:
+      returns: Dict
+  _identify_citation_relationships:
+    type: sync
+    module: scholar_verse.sub_agents.citation_graph.tools.relationship_identification
+    args: [self, citations, tool_context]
+    params:
+      returns: Dict
+  _identify_citation_type:
+    type: sync
+    module: scholar_verse.sub_agents.deep_search.tools.validation
+    args: [self, citation]
+    params:
+      returns: str
+  _identify_concept_relationships:
+    type: sync
+    module: scholar_verse.sub_agents.citation_graph.tools.relationship_identification
+    args: [self, keywords, abstract]
+    params:
+      returns: Dict
+  _identify_query_type:
+    type: sync
+    module: scholar_verse.sub_agents.citation_graph.tools.nl2cypher
+    args: [self, query]
+    params:
+      returns: Tuple
+  _init_memory_service:
+    type: sync
+    module: scholar_verse.shared_libraries.memory_manager
+    args: [self]
+  _init_session_service:
+    type: sync
+    module: scholar_verse.shared_libraries.session_manager
+    args: [self]
+    params:
+      returns: VertexAiSessionService
+  _initialize_citation_state:
+    type: sync
+    module: scholar_verse.sub_agents.deep_search.tools.validation
+    args: [self, context]
+  _initialize_rag_state:
+    type: sync
+    module: scholar_verse.sub_agents.deep_search.tools.rag_integration
+    args: [self]
+  _initialize_rag_state_async:
+    type: async
+    module: scholar_verse.sub_agents.deep_search.tools.rag_integration
+    args: [self]
+  _initialize_tools:
+    type: async
+    module: scholar_verse.base_agent
+    args: [self]
+  _is_same_domain:
+    type: sync
+    module: scholar_verse.sub_agents.deep_search.tools.web_scraper
+    args: [self, url1, url2]
+    params:
+      returns: bool
+  _is_valid_url:
+    type: sync
+    module: scholar_verse.sub_agents.deep_search.tools.web_scraper
+    args: [self, url]
+    params:
+      returns: bool
+  _parse_citation:
+    type: sync
+    module: scholar_verse.sub_agents.citation_graph.tools.citation_extraction
+    args: [self, citation_text]
+    params:
+      returns: Dict
+  _parse_content:
+    type: sync
+    module: scholar_verse.sub_agents.deep_search.tools.web_scraper
+    args: [self, html_content, url, extraction_type]
+    params:
+      returns: Dict
+  _parse_references:
+    type: sync
+    module: scholar_verse.sub_agents.citation_graph.tools.citation_extraction
+    args: [self, references_text]
+    params:
+      returns: List[Dict]
+  _process:
+    type: async
+    module: scholar_verse.base_agent
+    args: [self, context]
+    params:
+      returns: Any
+  _process_citations:
+    type: sync
+    module: scholar_verse.sub_agents.deep_search.agent
+    args: [self, citations]
+    params:
+      returns: Dict
+  _process_content:
+    type: sync
+    module: scholar_verse.sub_agents.deep_search.agent
+    args: [self, content, source_url, context]
+    params:
+      returns: Dict
+  _process_entities:
+    type: sync
+    module: scholar_verse.sub_agents.deep_search.agent
+    args: [self, entities]
+    params:
+      returns: Dict
+  _process_request:
+    type: async
+    module: scholar_verse.agent
+    args: [self, request, context]
+    params:
+      returns: str
+  _process_search:
+    type: async
+    module: scholar_verse.sub_agents.deep_search.agent
+    args: [self, query, ctx]
+    params:
+      returns: AsyncGenerator
+  _process_search_result:
+    type: async
+    module: scholar_verse.sub_agents.deep_search.agent
+    args: [self, result, context]
+    params:
+      returns: Dict
+  _process_search_results:
+    type: sync
+    module: scholar_verse.sub_agents.deep_search.agent
+    args: [self, search_results, query, context]
+    params:
+      returns: Dict
+  _register_tools:
+    type: sync
+    module: scholar_verse.agent
+    args: [self]
+  _reset:
+    type: sync
+    module: scholar_verse.agent
+    args: [self]
+    params:
+      returns: None
+  _reset_circuit_impl:
+    type: async
+    module: scholar_verse.agent
+    args: [self, context, agent_name]
+    params:
+      returns: Dict
+  _route_to_agent_impl:
+    type: async
+    module: scholar_verse.agent
+    args: [self, context, agent_name, input_data]
+    params:
+      returns: Dict
+  _run_async:
+    type: async
+    module: scholar_verse.sub_agents.deep_search.tools.base_tool
+    args: [self, args, context]
+    params:
+      returns: AsyncGenerator
+  _run_async_impl:
+    type: async
+    module: scholar_verse.sub_agents.deep_search.agent
+    args: [self, ctx]
+    params:
+      returns: AsyncGenerator
+  _similarity:
+    type: sync
+    module: scholar_verse.sub_agents.citation_graph.tools.citation_extraction
+    args: [self, s1, s2]
+    params:
+      returns: float
+  _simulate_rag_retrieval:
+    type: sync
+    module: scholar_verse.sub_agents.deep_search.tools.rag_integration
+    args: [self, query, context]
+    params:
+      returns: Dict
+  _simulate_search_results:
+    type: async
+    module: scholar_verse.sub_agents.deep_search.tools.web_search
+    args: [self, query, search_type, max_results, include_domains, exclude_domains]
+    params:
+      returns: Dict
+  _to_dict:
+    type: sync
+    module: scholar_verse.shared_libraries.state_management.adaptive_state
+    args: [self]
+    params:
+      returns: Dict
+  _track_citation:
+    type: sync
+    module: scholar_verse.sub_agents.deep_search.tools.validation
+    args: [self, context, citation, citation_type, validation_result, source_url]
+  _trip:
+    type: sync
+    module: scholar_verse.agent
+    args: [self]
+    params:
+      returns: None
+  _update_component:
+    type: sync
+    module: scholar_verse.shared_libraries.state_management.adaptive_state
+    args: [self, state, updates]
+    params:
+      returns: VersionedState
+  _update_metadata:
+    type: sync
+    module: scholar_verse.shared_libraries.state_management.adaptive_state
+    args: [self, metadata]
+    params:
+      returns: StateMetadata
+  _update_workflow_after_agent_call:
+    type: async
+    module: scholar_verse.agent
+    args: [self, context, agent_name, result]
+    params:
+      returns: None
+  _validate_doi:
+    type: sync
+    module: scholar_verse.sub_agents.deep_search.tools.validation
+    args: [self, doi, validation_level]
+    params:
+      returns: Dict
+  _validate_formatted_citation:
+    type: sync
+    module: scholar_verse.sub_agents.deep_search.tools.validation
+    args: [self, citation, source_url, validation_level]
+    params:
+      returns: Dict
+  _validate_url:
+    type: sync
+    module: scholar_verse.sub_agents.deep_search.tools.validation
+    args: [self, url, validation_level]
+    params:
+      returns: Dict
+  add_citation:
+    type: sync
+    module: scholar_verse.sub_agents.citation_graph.agent
+    args: [citing_paper, cited_paper, tool_context]
+    params:
+      returns: Dict
+  add_memory:
+    type: async
+    module: scholar_verse.shared_libraries.memory_manager
+    args: [self, content, metadata, session_id, user_id]
+    params:
+      returns: str
+  add_paper:
+    type: sync
+    module: scholar_verse.sub_agents.citation_graph.tools.neo4j_integration
+    args: [self, paper_data, tool_context]
+    params:
+      returns: Dict
+  add_paper_to_graph:
+    type: sync
+    module: scholar_verse.sub_agents.citation_graph.agent
+    args: [paper_data, tool_context]
+    params:
+      returns: Dict
+  add_to_memory:
+    type: async
+    module: scholar_verse.shared_libraries.session_manager
+    args: [self, session, content, metadata]
+    params:
+      returns: str
+  analyze_citation_network:
+    type: sync
+    module: scholar_verse.sub_agents.citation_graph.agent
+    args: [tool_context]
+    params:
+      returns: Dict
+  analyze_document_quality:
+    type: sync
+    module: scholar_verse.sub_agents.ingestion.agent
+    args: [document_id, tool_context]
+    params:
+      returns: Dict
+  analyze_request:
+    type: async
+    module: scholar_verse.tools.dynamic_routing
+    args: [request, tool_context]
+    params:
+      returns: Dict
+  analyze_trends:
+    type: sync
+    module: scholar_verse.sub_agents.insight.agent
+    args: [topics, time_period, tool_context]
+    params:
+      returns: Dict
+  apply_extraction_improvements:
+    type: sync
+    module: scholar_verse.sub_agents.ingestion.tools.extraction_improvement
+    args: [self, extraction_params, tool_context]
+    params:
+      returns: Dict
+  async_wrapper:
+    type: async
+    module: scholar_verse.agent
+    params:
+      returns: T
+  base_key:
+    type: sync
+    module: scholar_verse.shared_libraries.state_manager
+    args: [self]
+    params:
+      returns: str
+  clear_retrieval_history:
+    type: sync
+    module: scholar_verse.sub_agents.deep_search.tools.rag_integration
+    args: [self, tool_context]
+    params:
+      returns: Dict
+  clear_scope:
+    type: async
+    module: scholar_verse.shared_libraries.state_manager
+    args: [self, scope]
+    params:
+      returns: None
+  close:
+    type: sync
+    module: scholar_verse.sub_agents.citation_graph.tools.neo4j_integration
+    args: [self]
+    params:
+      returns: None
+  compare_papers:
+    type: sync
+    module: scholar_verse.sub_agents.cross_paper_analysis.agent
+    args: [paper_ids, tool_context]
+    params:
+      returns: Dict
+  connect:
+    type: sync
+    module: scholar_verse.sub_agents.citation_graph.tools.neo4j_integration
+    args: [self]
+    params:
+      returns: bool
+  connect_to_neo4j:
+    type: sync
+    module: scholar_verse.sub_agents.citation_graph.agent
+    args: [uri, username, password, tool_context]
+    params:
+      returns: Dict
+  create_agent_context:
+    type: sync
+    module: scholar_verse.base_agent
+    args: [self, user_id, session_id, input_data, metadata]
+    params:
+      returns: AgentContext
+  create_constraints_and_indexes:
+    type: sync
+    module: scholar_verse.sub_agents.citation_graph.tools.neo4j_integration
+    args: [self]
+    params:
+      returns: Dict
+  create_retrieval_tool:
+    type: sync
+    module: scholar_verse.sub_agents.deep_search.tools.rag_integration
+    args: [self]
+  create_session:
+    type: async
+    module: scholar_verse.shared_libraries.session_manager
+    args: [self, user_id, session_id, initial_state]
+    params:
+      returns: Session
+  decorator:
+    type: sync
+    module: scholar_verse.agent
+    args: [func]
+    params:
+      returns: Callable
+  delete:
+    type: async
+    module: scholar_verse.shared_libraries.state_manager
+    args: [self, key, scope]
+    params:
+      returns: bool
+  delete_memory:
+    type: async
+    module: scholar_verse.shared_libraries.memory_manager
+    args: [self, memory_id]
+    params:
+      returns: bool
+  delete_state:
+    type: async
+    module: scholar_verse.shared_libraries.state_management.redis_state_store
+    args: [self, state_id]
+    params:
+      returns: bool
+  execute_cypher:
+    type: sync
+    module: scholar_verse.sub_agents.citation_graph.agent
+    args: [cypher, parameters, tool_context]
+    params:
+      returns: Dict
+  execute_query:
+    type: sync
+    module: scholar_verse.sub_agents.citation_graph.tools.neo4j_integration
+    args: [self, query, parameters]
+    params:
+      returns: List[Dict]
+  execute_workflow:
+    type: async
+    module: scholar_verse.tools.dynamic_routing
+    args: [request, workflow_stage, tool_context]
+    params:
+      returns: str
+  execute_workflow_stage:
+    type: tool
+    module: scholar_verse.tools.dynamic_routing
+    args: [context, stage, input_data, metadata]
+    params:
+      returns: Dict
+  extract_citations:
+    type: sync
+    module: scholar_verse.sub_agents.citation_graph.tools.citation_extraction
+    args: [self, document_text, document_id, tool_context]
+    params:
+      returns: Dict
+  extract_metadata:
+    type: sync
+    module: scholar_verse.sub_agents.ingestion.tools.pdf_extraction
+    args: [self, pdf_path, tool_context]
+    params:
+      returns: Dict
+  extract_text:
+    type: sync
+    module: scholar_verse.sub_agents.ingestion.tools.pdf_extraction
+    args: [self, pdf_path, tool_context]
+    params:
+      returns: Dict
+  finalize:
+    type: async
+    module: scholar_verse.base_agent
+    args: [self]
+  from_dict:
+    type: sync
+    module: scholar_verse.shared_libraries.state_management.redis_state_store
+    args: [cls, data]
+    params:
+      returns: StateT
+  generate_improvement_suggestions:
+    type: sync
+    module: scholar_verse.sub_agents.ingestion.tools.quality_analysis
+    args: [self, analysis_result]
+    params:
+      returns: List[str]
+  generate_insights:
+    type: sync
+    module: scholar_verse.sub_agents.insight.agent
+    args: [query, context, tool_context]
+    params:
+      returns: Dict
+  get:
+    type: async
+    module: scholar_verse.shared_libraries.state_manager
+    args: [self, key, default, scope, model]
+    params:
+      returns: Any
+  get_agent_for_stage:
+    type: sync
+    module: scholar_verse.tools.dynamic_routing
+    args: [stage]
+    params:
+      returns: Optional[AgentTool]
+  get_agent_status:
+    type: async
+    module: scholar_verse.agent
+    args: [self, agent_name]
+    params:
+      returns: Dict
+  get_available_agents:
+    type: tool
+    module: scholar_verse.tools.dynamic_routing
+    params:
+      returns: Dict
+  get_available_agents_for_stage:
+    type: sync
+    module: scholar_verse.tools.dynamic_routing
+    args: [stage]
+    params:
+      returns: List[AgentTool]
+  get_available_workflow_stages:
+    type: tool
+    module: scholar_verse.tools.dynamic_routing
+    params:
+      returns: Dict
+  get_breaker:
+    type: sync
+    module: scholar_verse.agent
+    args: [self, agent_name]
+    params:
+      returns: CircuitBreaker
+  get_breaker_status:
+    type: sync
+    module: scholar_verse.agent
+    args: [self]
+    params:
+      returns: Dict
+  get_citation_stats:
+    type: sync
+    module: scholar_verse.sub_agents.deep_search.tools.validation
+    args: [self, context]
+    params:
+      returns: Dict
+  get_config:
+    type: sync
+    module: scholar_verse.config
+    params:
+      returns: Dict
+  get_document_state:
+    type: sync
+    module: scholar_verse.shared_libraries.state_management.adaptive_state
+    args: [self, context]
+    params:
+      returns: DocumentState
+  get_document_summary:
+    type: sync
+    module: scholar_verse.sub_agents.ingestion.tools.document_processor
+    args: [self, document_id, tool_context]
+    params:
+      returns: Dict
+  get_driver:
+    type: sync
+    module: scholar_verse.sub_agents.citation_graph.tools.neo4j_integration
+    args: [self]
+    params:
+      returns: Optional[Driver]
+  get_extraction_performance:
+    type: sync
+    module: scholar_verse.sub_agents.ingestion.agent
+    args: [tool_context]
+    params:
+      returns: Dict
+  get_extraction_performance_metrics:
+    type: sync
+    module: scholar_verse.sub_agents.ingestion.tools.extraction_improvement
+    args: [self, tool_context]
+    params:
+      returns: Dict
+  get_graph_statistics:
+    type: sync
+    module: scholar_verse.sub_agents.citation_graph.agent
+    args: [tool_context]
+    params:
+      returns: Dict
+  get_memory:
+    type: async
+    module: scholar_verse.shared_libraries.memory_manager
+    args: [self, memory_id]
+    params:
+      returns: Optional[MemoryRecord]
+  get_retrieval_history:
+    type: sync
+    module: scholar_verse.sub_agents.deep_search.tools.rag_integration
+    args: [self, tool_context]
+    params:
+      returns: Dict
+  get_session:
+    type: async
+    module: scholar_verse.shared_libraries.session_manager
+    args: [self, user_id, session_id]
+    params:
+      returns: Optional[Session]
+  get_session_state:
+    type: sync
+    module: scholar_verse.shared_libraries.state_manager
+    args: [self]
+    params:
+      returns: Dict
+  get_state:
+    type: async
+    module: scholar_verse.shared_libraries.state_management.redis_state_store
+    args: [self, state_id, state_type]
+    params:
+      returns: Optional[StateT]
+  get_tracked_citations:
+    type: sync
+    module: scholar_verse.sub_agents.deep_search.tools.validation
+    args: [self, context, filter_by_validity]
+    params:
+      returns: Dict
+  get_translation_history:
+    type: sync
+    module: scholar_verse.sub_agents.citation_graph.tools.nl2cypher
+    args: [self, tool_context]
+    params:
+      returns: Dict
+  get_workflow_state:
+    type: async
+    module: scholar_verse.agent
+    args: [self, context]
+    params:
+      returns: Dict
+  get_workflow_status:
+    type: tool
+    module: scholar_verse.tools.dynamic_routing
+    args: [context]
+    params:
+      returns: Dict
+  identify_common_themes:
+    type: sync
+    module: scholar_verse.sub_agents.cross_paper_analysis.agent
+    args: [paper_ids, tool_context]
+    params:
+      returns: Dict
+  identify_paper_relationships:
+    type: sync
+    module: scholar_verse.sub_agents.citation_graph.tools.relationship_identification
+    args: [self, paper_data, tool_context]
+    params:
+      returns: Dict
+  identify_relationships:
+    type: sync
+    module: scholar_verse.sub_agents.citation_graph.agent
+    args: [paper_data, tool_context]
+    params:
+      returns: Dict
+  identify_research_trends:
+    type: sync
+    module: scholar_verse.sub_agents.citation_graph.agent
+    args: [tool_context]
+    params:
+      returns: Dict
+  initialize:
+    type: async
+    module: scholar_verse.agent
+    args: [self]
+  initialize_tools:
+    type: async
+    module: scholar_verse.sub_agents.deep_search.agent
+    args: [self]
+  last_updated:
+    type: sync
+    module: scholar_verse.shared_libraries.state_management.adaptive_state
+    args: [self, value]
+    params:
+      returns: None
+  list_memories:
+    type: async
+    module: scholar_verse.shared_libraries.memory_manager
+    args: [self, user_id, session_id, limit, offset]
+    params:
+      returns: List[MemoryRecord]
+  list_states:
+    type: async
+    module: scholar_verse.shared_libraries.state_management.redis_state_store
+    args: [self, pattern]
+    params:
+      returns: list[str]
+  log_critical:
+    type: sync
+    module: scholar_verse.shared_libraries.logging_utils
+    args: [message]
+    params:
+      returns: None
+  log_debug:
+    type: sync
+    module: scholar_verse.shared_libraries.logging_utils
+    args: [message]
+    params:
+      returns: None
+  log_error:
+    type: sync
+    module: scholar_verse.shared_libraries.logging_utils
+    args: [message]
+    params:
+      returns: None
+  log_info:
+    type: sync
+    module: scholar_verse.shared_libraries.logging_utils
+    args: [message]
+    params:
+      returns: None
+  log_warning:
+    type: sync
+    module: scholar_verse.shared_libraries.logging_utils
+    args: [message]
+    params:
+      returns: None
+  main:
+    type: sync
+    module: scholar_verse.main
+  make_json_serializable:
+    type: sync
+    module: scholar_verse.sub_agents.deep_search.agent
+    args: [obj]
+    params:
+      returns: Any
+  match_citations_to_papers:
+    type: sync
+    module: scholar_verse.sub_agents.citation_graph.tools.citation_extraction
+    args: [self, citations, tool_context]
+    params:
+      returns: Dict
+  parse_args:
+    type: sync
+    module: scholar_verse.main
+  prepare_3d_visualization:
+    type: sync
+    module: scholar_verse.sub_agents.visualization.agent
+    args: [data, visualization_type, tool_context]
+    params:
+      returns: Dict
+  process:
+    type: async
+    module: scholar_verse.base_agent
+    args: [self, context]
+    params:
+      returns: Any
+  process_document:
+    type: sync
+    module: scholar_verse.sub_agents.ingestion.tools.document_processor
+    args: [self, document_path, tool_context]
+    params:
+      returns: Dict
+  process_extraction_feedback:
+    type: sync
+    module: scholar_verse.sub_agents.ingestion.tools.extraction_improvement
+    args: [self, document_id, feedback, tool_context]
+    params:
+      returns: Dict
+  process_multiple_documents:
+    type: sync
+    module: scholar_verse.sub_agents.ingestion.tools.document_processor
+    args: [self, document_paths, tool_context]
+    params:
+      returns: Dict
+  provide_extraction_feedback:
+    type: sync
+    module: scholar_verse.sub_agents.ingestion.agent
+    args: [document_id, ratings, comments, tool_context]
+    params:
+      returns: Dict
+  record_failure:
+    type: sync
+    module: scholar_verse.agent
+    args: [self, error]
+    params:
+      returns: None
+  record_success:
+    type: sync
+    module: scholar_verse.agent
+    args: [self]
+    params:
+      returns: None
+  reset_workflow:
+    type: async
+    module: scholar_verse.agent
+    args: [self, context]
+    params:
+      returns: Dict
+  retrieve_information:
+    type: sync
+    module: scholar_verse.sub_agents.deep_search.tools.rag_integration
+    args: [self, query, context, tool_context]
+    params:
+      returns: Dict
+  retry:
+    type: sync
+    module: scholar_verse.agent
+    args: [max_attempts, initial_delay, max_delay, backoff_factor, jitter, retry_on]
+    params:
+      returns: Callable
+  role_name:
+    type: sync
+    module: scholar_verse.base_agent
+    args: [self]
+    params:
+      returns: str
+  route_to_agent:
+    type: async
+    module: scholar_verse.tools.dynamic_routing
+    args: [request, agent_name, tool_context]
+    params:
+      returns: str
+  run:
+    type: async
+    module: scholar_verse.agent
+    args: [self, context]
+    params:
+      returns: Dict
+  save_state:
+    type: async
+    module: scholar_verse.shared_libraries.state_management.redis_state_store
+    args: [self, state_id, state]
+    params:
+      returns: bool
+  scope:
+    type: sync
+    module: scholar_verse.shared_libraries.state_manager
+    args: [self]
+    params:
+      returns: StateScope
+  search:
+    type: async
+    module: scholar_verse.sub_agents.deep_search.agent
+    args: [self, query, context, search_type]
+    params:
+      returns: Dict
+  search_memories:
+    type: async
+    module: scholar_verse.shared_libraries.memory_manager
+    args: [self, query, user_id, session_id, top_k, min_relevance]
+    params:
+      returns: List[MemoryRecord]
+  search_memory:
+    type: async
+    module: scholar_verse.shared_libraries.session_manager
+    args: [self, query, user_id, top_k]
+    params:
+      returns: Dict
+  sent_tokenize:
+    type: sync
+    module: scholar_verse.sub_agents.deep_search.tools.content_extraction
+    args: [text]
+  set:
+    type: async
+    module: scholar_verse.shared_libraries.state_manager
+    args: [self, key, value, scope, merge]
+    params:
+      returns: None
+  set_log_level:
+    type: sync
+    module: scholar_verse.config
+    args: [level]
+    params:
+      returns: None
+  setup_knowledge_graph:
+    type: sync
+    module: scholar_verse.sub_agents.citation_graph.agent
+    args: [tool_context]
+    params:
+      returns: Dict
+  setup_logging:
+    type: sync
+    module: scholar_verse.shared_libraries.logging_utils
+    args: [name]
+    params:
+      returns: logging.Logger
+  state:
+    type: sync
+    module: scholar_verse.agent
+    args: [self]
+    params:
+      returns: CircuitState
+  sync_wrapper:
+    type: sync
+    module: scholar_verse.agent
+    params:
+      returns: T
+  to_dict:
+    type: sync
+    module: scholar_verse.shared_libraries.state_management.redis_state_store
+    args: [self]
+    params:
+      returns: Dict
+  tools:
+    type: sync
+    module: scholar_verse.sub_agents.deep_search.agent
+    args: [self]
+    params:
+      returns: List[BaseTool]
+  translate_to_cypher:
+    type: sync
+    module: scholar_verse.sub_agents.citation_graph.agent
+    args: [query, tool_context]
+    params:
+      returns: Dict
+  update:
+    type: async
+    module: scholar_verse.shared_libraries.state_manager
+    args: [self, updates, scope]
+    params:
+      returns: None
+  update_docs:
+    type: sync
+    module: scholar_verse.shared_libraries.state_management.adaptive_state
+    args: [state, updates]
+    params:
+      returns: VersionedState
+  update_document_state:
+    type: async
+    module: scholar_verse.shared_libraries.state_management.adaptive_state
+    args: [self, context, updates]
+    params:
+      returns: bool
+  update_memory:
+    type: async
+    module: scholar_verse.shared_libraries.memory_manager
+    args: [self, memory_id, content, metadata_updates]
+    params:
+      returns: bool
+  update_session_state:
+    type: async
+    module: scholar_verse.shared_libraries.session_manager
+    args: [self, session, state_updates, merge]
+    params:
+      returns: Session
+  update_state:
+    type: async
+    module: scholar_verse.shared_libraries.state_management.redis_state_store
+    args: [self, state_id, state_type, update_fn]
+    params:
+      returns: Optional[StateT]
+  update_state_fn:
+    type: sync
+    module: scholar_verse.sub_agents.deep_search.tools.rag_integration
+    args: [state, _]
+  update_workflow_stage:
+    type: async
+    module: scholar_verse.agent
+    args: [self, context, stage, is_complete, metadata]
+    params:
+      returns: Dict
+  validate_citations:
+    type: async
+    module: scholar_verse.sub_agents.deep_search.agent
+    args: [self, citations, source_urls]
+    params:
+      returns: Dict
+
+variables:
+  APP_ENV:
+    type: env
+    params:
+      caller: [os.getenv]
+      path: [env_path]
+  GOOGLE_API_KEY:
+    type: env
+    params:
+      caller: [os.getenv]
+      path: [env_path]
+  GOOGLE_CLOUD_LOCATION:
+    type: env
+    params:
+      caller: [os.getenv]
+      path: [env_path]
+  GOOGLE_CLOUD_PROJECT:
+    type: env
+    params:
+      caller: [os.getenv]
+      path: [env_path]
+  GOOGLE_GENAI_USE_VERTEXAI:
+    type: env
+    params:
+      caller: [os.getenv]
+      path: [env_path]
+  LOG_LEVEL:
+    type: env
+    params:
+      caller: [os.getenv]
+      path: [env_path]
+  NEO4J_PASSWORD:
+    type: env
+    params:
+      caller: [os.getenv, os.environ.get]
+      path: [env_path]
+  NEO4J_URI:
+    type: env
+    params:
+      caller: [os.getenv, os.environ.get]
+      path: [env_path]
+  NEO4J_USERNAME:
+    type: env
+    params:
+      caller: [os.getenv, os.environ.get]
+      path: [env_path]
+  QDRANT_HOST:
+    type: env
+    params:
+      caller: [os.getenv]
+      path: [env_path]
+  QDRANT_PORT:
+    type: env
+    params:
+      caller: [os.getenv]
+      path: [env_path]
+  RAG_CORPUS:
+    type: env
+    params:
+      caller: [os.getenv]
+      path: [env_path]
+  REDIS_DB:
+    type: env
+    params:
+      caller: [os.getenv]
+      path: [env_path]
+  REDIS_HOST:
+    type: env
+    params:
+      caller: [os.getenv]
+      path: [env_path]
+  REDIS_PASSWORD:
+    type: env
+    params:
+      caller: [os.getenv]
+      path: [env_path]
+  REDIS_PORT:
+    type: env
+    params:
+      caller: [os.getenv]
+      path: [env_path]
+
+files:
+  .env:
+    type: literal
+    actions: [read]
+    params:
+      path: [Path.parent.parent]
+  DATA_DIR:
+    type: variable
+    actions: [write]
+    params:
+      caller: [DATA_DIR.mkdir]
+  document_path:
+    type: variable
+    actions: [read]
+    params:
+      caller: [os.path.exists, Path]
+  LOGS_DIR:
+    type: variable
+    actions: [write]
+    params:
+      caller: [LOGS_DIR.mkdir]
+  pdf_path:
+    type: variable
+    actions: [read]
+    params:
+      caller: [os.path.exists, open, Path]
+  TEMP_DIR:
+    type: variable
+    actions: [write]
+    params:
+      caller: [TEMP_DIR.mkdir]
